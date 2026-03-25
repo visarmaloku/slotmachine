@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Register - Neon Slots</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="register-container">
+    <div class="register-card">
+        <h1>Welcome to Visi Slots</h1>
+        <p>Enter a username to start playing — only a username is required.</p>
+
+        <form id="registerForm">
+            <label for="usernameInput">Username:</label>
+            <input id="usernameInput" type="text" placeholder="Choose a username" maxlength="20" required />
+            <button type="submit" id="registerButton">Start</button>
+        </form>
+
+
+        <p class="small">Your username and score are saved locally in your browser. The top scores are shown on the leaderboard.</p>
+    </div>
+</div>
+
+<script>
+    // If already registered, go to main page
+    if (localStorage.getItem('slot_username')) {
+        window.location.href = 'index.html';
+    }
+
+    const form = document.getElementById('registerForm');
+    const input = document.getElementById('usernameInput');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = input.value.trim();
+        if (!name) return;
+        localStorage.setItem('slot_username', name);
+        if (localStorage.getItem('slot_score') === null) {
+            localStorage.setItem('slot_score', '0');
+        }
+        window.location.href = 'index.html';
+    });
+</script>
+</body>
+</html>
